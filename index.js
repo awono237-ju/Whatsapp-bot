@@ -15,9 +15,10 @@ app.get('/webhook', (req, res) => {
 });
 
 app.post('/webhook', (req, res) => {
-  console.log('Message recu:', JSON.stringify(req.body));
+  console.log('Message recu');
   res.sendStatus(200);
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log('Bot lance sur ' + PORT));
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Bot lance');
+});
