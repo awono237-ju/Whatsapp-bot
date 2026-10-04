@@ -3,24 +3,21 @@ const app = express();
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('Bot en ligne bro !');
+  res.send('Bot WhatsApp awono237 en ligne !');
 });
 
 app.get('/webhook', (req, res) => {
-  const token = req.query['hub.verify_token'];
-  const challenge = req.query['hub.challenge'];
-  if (token === 'awono237_token') {
-    res.send(challenge);
+  if (req.query['hub.verify_token'] === 'awono237_token') {
+    res.send(req.query['hub.challenge']);
   } else {
     res.sendStatus(403);
   }
 });
 
 app.post('/webhook', (req, res) => {
-  console.log('Message recu');
+  console.log('Message recu:', JSON.stringify(req.body));
   res.sendStatus(200);
 });
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log('Bot lance');
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log('Bot lance sur ' + PORT));
